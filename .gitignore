@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+
+# Dados locais e DuckDB (não sobem para o GitHub)
+data/
+*.duckdb
+*.duckdb.wal
+
+# Pastas geradas pelo dbt
+target/
+dbt_packages/
+logs/
