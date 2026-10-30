@@ -2,7 +2,7 @@
 __pycache__/
 *.pyc
 
-# Dados locais e DuckDB (não sobem para o GitHub)
+# Dados locais e DuckDB
 data/
 *.duckdb
 *.duckdb.wal
