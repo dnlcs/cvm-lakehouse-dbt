@@ -6,6 +6,7 @@ with raw_source as (
         delim = ';',
         encoding = 'latin-1'
     )
+    
 ),
 
 renamed_and_filtered as (
@@ -28,6 +29,7 @@ renamed_and_filtered as (
 
     from raw_source
     where ordem_exerc = 'ÚLTIMO'
+
 )
 
 select * from renamed_and_filtered
