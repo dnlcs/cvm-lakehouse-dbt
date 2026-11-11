@@ -1,0 +1,79 @@
+version: 2
+
+models:
+  - name: stg_dre
+    description: "Demonstração do Resultado do Exercício padronizada da CVM (base consolidada)."
+    columns:
+      - name: cod_cvm
+        description: "Código regulatório único da companhia aberta na CVM."
+        tests:
+          - not_null
+
+      - name: dt_referencia
+        description: "Data-base referência do exercício contábil."
+        tests:
+          - not_null
+
+      - name: cod_conta
+        description: "Código numérico da conta contábil (ex: 3.01 para Receita Líquida)."
+        tests:
+          - not_null
+
+      - name: valor_conta
+        description: "Valor numérico registrado na conta contábil."
+        tests:
+          - not_null
+
+      - name: ordem_exerc
+        description: "Ordem do exercício (filtrado estritamente pelo ÚLTIMO para eliminar duplicatas temporais)."
+        tests:
+          - accepted_values:
+              values: ['ÚLTIMO']
+    
+  - name: stg_bpa
+    description: "Balanço Patrimonial Ativo padronizado da CVM (base consolidada)."
+    columns:
+      - name: cod_cvm
+        tests:
+          - not_null
+      
+      - name: dt_referencia
+        tests:
+          - not_null
+
+      - name: cod_conta
+        tests:
+          - not_null
+
+      - name: valor_conta
+        tests:
+          - not_null
+
+      - name: ordem_exerc
+        tests: 
+          - accepted_values:
+              values: ['ÚLTIMO']
+
+  - name: stg_bpp
+    description: "Balanço Patrimonial Passivo padronizado da CVM (base consolidada)."
+    columns:
+      - name: cod_cvm
+        tests:
+          - not_null
+
+      - name: dt_referencia
+        tests: 
+          - not_null
+
+      - name: cod_conta
+        tests:
+          - not_null
+
+      - name: valor_conta
+        tests:
+          - not_null
+
+      - name: ordem_exerc
+        tests:
+          - accepted_values:
+              values: ['ÚLTIMO']
