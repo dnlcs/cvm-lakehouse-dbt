@@ -20,11 +20,14 @@ renamed_and_filtered as (
         cast(dt_fim_exerc as date) as dt_fim_exercicio,
         ordem_exerc,
         cast(versao as integer) as versao,
-        escala_moeda,
 
         trim(cd_conta) as cod_conta,
         trim(ds_conta) as desc_conta,
-        cast(vl_conta as double) as valor_conta
+        case 
+            when escala_moeda = 'UNIDADE' then cast(vl_conta as double) / 1000.0
+            else cast(vl_conta as double)
+        end as valor_conta,
+        'MIL' as escala_moeda
 
     from raw_source
     where ordem_exerc = 'ÚLTIMO'
