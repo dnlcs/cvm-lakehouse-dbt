@@ -2,7 +2,6 @@ with dre as (
 
     select 
         cod_cvm,
-        max(nome_empresa) as nome_empresa,
         dt_referencia,
         max(escala_moeda) as escala_moeda,
         max(case when cod_conta = '3.01' then valor_conta end) as receita_liquida,
@@ -52,7 +51,6 @@ consolidado as (
 
     select  
         dre.cod_cvm,
-        dre.nome_empresa,
         dre.dt_referencia,
         extract(year from dre.dt_referencia) as ano,
         dre.escala_moeda,

@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: dim_empresas
+    description: "Dimensão cadastral única das companhias abertas listadas na CVM."
+    columns:
+      - name: cod_cvm
+        description: "Chave primária regulatória única da companhia na CVM."
+        tests: 
+          - unique
+          - not_null
+
+      - name: cnpj
+        description: "CNPJ da companhia aberta."
+        tests: 
+          - not_null
+
+      - name: nome_empresa
+        description: "Razão social mais recente registrada pela companhia."
+        tests:
+          - not_null
+
+  - name: fct_indicadores_financeiros
+    description: "Tabela fato consolidada com indicadores fundamentalistas anuais por companhia."
+    columns: 
+      - name: cod_cvm
+        description: "Chave estrangeira referente à dimensão dim_empresas."
+        tests: 
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_empresas')
+                field: cod_cvm
+
+      - name: dt_referencia
+        description: "Data de encerramento do exercício fiscal."
+        tests: 
+          - not_null
+      
+      - name: roe 
+        description: "Return on Equity (Lucro Líquido / Patrimônio Líquido), anulado quando PL <= 0."
+
+      - name: roa 
+        description: "Return on Assets (Lucro Líquido / Ativo Total)."
+
+      - name: margem_liquida
+        description: "Margem Líquida (Lucro Líquido / Receita Líquida)."
+
+      - name: liquidez_corrente
+        description: "Liquidez Corrente (Ativo Circulante / Passivo Circulante)."
+
+      - name: endividamento_geral
+        description: "Participação de capital de terceiros sobre o Ativo Total."
+        
+         
